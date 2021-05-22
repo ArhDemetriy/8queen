@@ -1,25 +1,17 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ChessTable from "./chessTable/ChessTable";
+import Queen from "./queen/Queen";
 
 function App() {
+  const tables = (new Queen()).getQueens()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className="App">{
+      tables
+        .map(table => <ChessTable queenPositions={table} key={Math.random()} />)
+    }</div>
   );
 }
 
