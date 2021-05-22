@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import ChessTable from "./chessTable/ChessTable";
 import Queen from "./queen/Queen";
