@@ -1,5 +1,7 @@
 class Queen{
-  constructor() {
+  constructor(adder: (newTable: Queen['table']) => void) {
+    this.sendTable = adder
+
     this.table = Array(8).fill(-1) as Queen['table']
     this.horizontals = Array(8).fill(false) as Queen['horizontals']
     this.leftDiagonals = Array(15).fill(false) as Queen['leftDiagonals']
@@ -51,10 +53,15 @@ class Queen{
     }
   }
 
+  private readonly sendTable: (newTable: Queen['table']) => void
   private readonly results: Queen['table'][] = []
   private save() {
     const newResult = ([] as any).concat(this.table) as Queen['table']
     this.results.push(newResult)
+
+    setTimeout(() => {
+      this.sendTable(newResult)
+    }, 0);
   }
 }
 export default Queen
