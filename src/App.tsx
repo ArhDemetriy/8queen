@@ -14,26 +14,34 @@ export default class App extends React.Component<{}, AppState> {
   constructor(props?: any) {
     super(props)
     this.state = { tables: [] }
-    this.queen = new Queen(this.addTable.bind(this))
   }
   render() {
     return (
-    <div className="App">{
-      this.state.tables
+      <div className="App">
+        <h3>
+          {`количество решений: ${this.state.tables.length}`}
+        </h3>
+        {this.state.tables
           .map(el => <ChessTable
             queenPositions={el.table}
-            key={el.id} />)
-    }</div>
-  );
+            key={el.id} />)}
+      </div>
+      );
+    }
+  componentDidMount() {
+    if (!this.queen) {
+      this.queen = new Queen(this.addTable.bind(this))
+    }
   }
-  private queen: Queen
-
+  private queen?: Queen
 
   private addTable(table: ReturnType<Queen['getQueens']>[0]) {
     this.state.tables.push({
       table,
       id: Math.random()
     })
-    this.setState(this.state)
+    setTimeout(() => {
+      this.setState(this.state)
+    }, 0);
   }
 }

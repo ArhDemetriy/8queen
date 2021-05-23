@@ -7,16 +7,11 @@ class Queen{
     this.leftDiagonals = Array(15).fill(false) as Queen['leftDiagonals']
     this.rightDiagonals = Array(15).fill(false) as Queen['rightDiagonals']
 
-    this.run()
+    this.searchSpace(0)
   }
 
   getQueens() {
     return this.results
-  }
-  private run() {
-    for (let i = 0; i < this.DSC; i++) {
-      this.searchSpace(i)
-    }
   }
   private readonly DSC = 8
   private table: [number, number, number, number, number, number, number, number]
@@ -58,10 +53,7 @@ class Queen{
   private save() {
     const newResult = ([] as any).concat(this.table) as Queen['table']
     this.results.push(newResult)
-
-    setTimeout(() => {
-      this.sendTable(newResult)
-    }, 0);
+    this.sendTable(newResult)
   }
 }
 export default Queen
